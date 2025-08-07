@@ -135,6 +135,9 @@ jobs:
           git commit -m "Update to version ${{ github.ref_name }}"
           git show
           git push git@github.com:cockpit-project/org.cockpit_project.CockpitClient HEAD
+          echo ${{ secrets.FLATHUB_TOKEN }} >> auth.txt
+          gh auth login --with-token < auth.txt
+          rm auth.txt
           gh pr create \
             --fill \
             -H cockpit-project:${{ github.ref_name }} \
